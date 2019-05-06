@@ -210,11 +210,13 @@
         </dependency>
 
         <!-- lucene搜索引擎 -->
+        <!-- https://mvnrepository.com/artifact/com.janeluo/ikanalyzer -->
         <dependency>
-            <groupId>com.lucene</groupId>
-            <artifactId>ikAnalyzer</artifactId>
-            <version>6.5.0</version>
+            <groupId>com.janeluo</groupId>
+            <artifactId>ikanalyzer</artifactId>
+            <version>2012_u6</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-analyzers-common</artifactId>

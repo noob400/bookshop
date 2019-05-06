@@ -15,7 +15,7 @@
     <context:annotation-config />
 
     <!-- 1.配置数据库相关参数properties的属性：${url} -->
-    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <context:property-placeholder location="classpath:../resources/jdbc.properties"/>
 
     <!-- 2.数据库连接池 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
@@ -43,9 +43,9 @@
         <!-- 扫描pojo包 使用别名 -->
         <property name="typeAliasesPackage" value="com.daniel.pojo" />
         <!-- 扫描sql配置文件:mapper需要的xml文件 -->
-        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="mapperLocations" value="classpath:../resources/mapper/*.xml"/>
         <!-- 配置MyBatis全局配置文件:mybatis-config.xml -->
-        <property name="configLocation" value="classpath:mybatis-config.xml" />
+        <property name="configLocation" value="classpath:../resources/mybatis-config.xml" />
         <property name="plugins">
             <array>
                 <bean class="com.github.pagehelper.PageInterceptor">
