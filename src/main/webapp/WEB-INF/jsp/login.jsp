@@ -38,8 +38,8 @@
                 return false;
             }
 
-            var user_ = {"studentid": studentid_, "password": password_};
-            var jsonData = JSON.stringify(user_);
+            var data_ = {"<%=isAdminMode?"name":"studentid"%>": studentid_, "password": password_};
+            var jsonData = JSON.stringify(data_);
             $.ajax({
                 type: "POST",
                 url:'<%=isAdminMode?"/admin/checkLogin":"/users/sessions"%>',

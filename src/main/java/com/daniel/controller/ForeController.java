@@ -90,4 +90,9 @@ public class ForeController {
         return mav;
     }
 
+    @RequestMapping("/dashboard.do")
+    public ModelAndView dashboard(){
+        ModelAndView mav =new ModelAndView("dashboard");
+        return mav;
+    }
 }
