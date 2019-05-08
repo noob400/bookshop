@@ -3,15 +3,19 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<%
+    boolean isAdminMode =request.getAttribute("mode")!=null && request.getAttribute("mode").equals("admin");
+%>
+
 <html>
 <head>
-    <title>校园二手书交易平台</title>
+    <title><%=isAdminMode?"管理员登录":"用户登录"%> | 校园二手书交易平台</title>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reset.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/login.css">
 </head>
 <body>
     <div id="login-container">
-        <h2>校园二手书交易平台</h2>
+        <h2><%=isAdminMode?"管理员登录":"用户登录"%> | 校园二手书交易平台</h2>
         <br />
         <form>
             <input type="text" id="studentid" class="userName" placeholder="学号"><br/>
@@ -38,15 +42,15 @@
             var jsonData = JSON.stringify(user_);
             $.ajax({
                 type: "POST",
-                url: "/users/sessions",
+                url:'<%=isAdminMode?"/admin/checkLogin":"/users/sessions"%>',
                 async: false,
                 dataType: "json",
                 contentType: "application/json;charset=UTF-8",
                 data: jsonData,
                 success: function (result) {
-                    if (result.resultCode == 200) {
+                    if (result.resultCode === 200) {
                         event.preventDefault();
-                        location.href = "home.do";
+                        location.href = '<%=isAdminMode?"dashboard.do":"home.do"%>';
                     } else {
                         event.preventDefault();
                         $('#errorInfo').html(result.message);

@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping(value = {"/users","/",""})
 public class UserController {
 
     @Autowired

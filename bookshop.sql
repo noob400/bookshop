@@ -18,6 +18,29 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
+-- Table structure for admin
+-- ----------------------------
+drop table if exists `admin`;
+create table admin
+(
+  id       int auto_increment,
+  name     varchar(20)  not null,
+  password varchar(255) not null,
+  constraint table_name_id_uindex
+  unique (id),
+  constraint table_name_name_uindex
+  unique (name)
+);
+
+alter table admin
+  add primary key (id);
+
+-- ----------------------------
+-- Records of admin
+-- ----------------------------
+INSERT INTO bookshop.admin (id, name, password) VALUES (1, 'y', '123');
+
+-- ----------------------------
 -- Table structure for book
 -- ----------------------------
 DROP TABLE IF EXISTS `book`;
