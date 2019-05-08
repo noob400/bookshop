@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.daniel</groupId>
-    <artifactId>mybookshop</artifactId>
+    <groupId>com.bookshop</groupId>
+    <artifactId>bookshopv1</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>mybookshop Maven Webapp</name>
+    <name>bookshop</name>
     <url>http://maven.apache.org</url>
     <dependencies>
 
@@ -249,7 +249,7 @@
     <properties>
         <file.encoding>UTF-8</file.encoding>
         <spring.version>4.3.18.RELEASE</spring.version>
-        <mysql.version>5.1.29</mysql.version>
+        <mysql.version>5.1.47</mysql.version>
         <servlet.version>3.1.0</servlet.version>
         <aspectj.version>1.8.1</aspectj.version>
         <commons-codec.version>1.9</commons-codec.version>
