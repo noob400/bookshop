@@ -3,6 +3,7 @@ package com.bookshop.controller;
 import com.bookshop.common.Result;
 import com.bookshop.common.ResultGenerator;
 import com.bookshop.pojo.Admin;
+import com.bookshop.pojo.User;
 import com.bookshop.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.TreeMap;
 
 
 @RequestMapping("/admin")
@@ -41,5 +44,49 @@ public class AdminController {
                 this.put("admin", a.getName());
             }
         });
+    }
+
+    @RequestMapping("/gather_user.do")
+    public ModelAndView gatherUser(){
+        ModelAndView mav =new ModelAndView("admin/gather_user");
+        mav.addObject("pageName","用户管理");
+        mav.addObject("pageAPI","/data/user");
+        mav.addObject("pageField",new LinkedHashMap<String,String>(){
+            {
+                put("id","ID");
+                put("studentid","学号");
+                put("name","姓名");
+                put("password","密码");
+                put("sex","性别");
+                put("tel","电话");
+                put("address","地址");
+                put("major","专业");
+            }
+        });
+        return mav;
+    }
+
+    @RequestMapping("/gather_book.do")
+    public ModelAndView gatherBook(){
+        ModelAndView mav =new ModelAndView("admin/gather_book");
+        mav.addObject("pageName","书籍管理");
+        mav.addObject("pageAPI","/data/book");
+        return mav;
+    }
+
+    @RequestMapping("/gather_spare.do")
+    public ModelAndView gatherSpare(){
+        ModelAndView mav =new ModelAndView("admin/gather_spare");
+        mav.addObject("pageName","闲置物管理");
+        mav.addObject("pageAPI","/data/spare");
+        return mav;
+    }
+
+    @RequestMapping("/gather_order.do")
+    public ModelAndView gatherOrder(){
+        ModelAndView mav =new ModelAndView("admin/gather_order");
+        mav.addObject("pageName","订单管理");
+        mav.addObject("pageAPI","/data/order");
+        return mav;
     }
 }
