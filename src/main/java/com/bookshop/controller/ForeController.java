@@ -88,9 +88,31 @@ public class ForeController {
         return mav;
     }
 
-    @RequestMapping("/dashboard.do")
-    public ModelAndView dashboard(){
-        ModelAndView mav =new ModelAndView("dashboard");
+    @RequestMapping("/gather_user.do")
+    public ModelAndView gatherUser(){
+        ModelAndView mav =new ModelAndView("admin/gather_user");
+        mav.addObject("pageName","用户管理");
+        return mav;
+    }
+
+    @RequestMapping("/gather_book.do")
+    public ModelAndView gatherBook(){
+        ModelAndView mav =new ModelAndView("admin/gather_book");
+        mav.addObject("pageName","书籍管理");
+        return mav;
+    }
+
+    @RequestMapping("/gather_spare.do")
+    public ModelAndView gatherSpare(){
+        ModelAndView mav =new ModelAndView("admin/gather_spare");
+        mav.addObject("pageName","闲置物管理");
+        return mav;
+    }
+
+    @RequestMapping("/gather_order.do")
+    public ModelAndView gatherOrder(){
+        ModelAndView mav =new ModelAndView("admin/gather_order");
+        mav.addObject("pageName","订单管理");
         return mav;
     }
 }
