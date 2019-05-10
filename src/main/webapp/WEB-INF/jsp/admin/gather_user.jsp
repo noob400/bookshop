@@ -38,6 +38,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
 </head>
 
 <body>
@@ -117,6 +118,7 @@
                                 <th>专业</th>
                             </tr>
                             </thead>
+                            <tbody></tbody>
                         </table>
                     </di>
                 </div>
@@ -143,14 +145,14 @@
 <!-- Custom Theme JavaScript -->
 <script src="../../../js/sb-admin-2.js"></script>
 
-<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+
 <script>
     $(document).ready(function () {
         $('#dataTable').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "ajax":"/data/user.json",
-            "columns": [
+            processing: true,
+            serverSide: true,
+            ajax:"/data/user.json",
+            columns: [
                 { "data": "id" },
                 { "data": "name" },
                 { "data": "password" },
@@ -159,11 +161,10 @@
                 { "data": "tel" },
                 { "data": "address" },
                 { "data": "major" }
-            ]
+            ],
         });
     });
+
 </script>
-
 </body>
-
 </html>

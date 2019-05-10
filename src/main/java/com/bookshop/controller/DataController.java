@@ -2,6 +2,8 @@ package com.bookshop.controller;
 
 
 import com.bookshop.pojo.User;
+import com.bookshop.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/data")
 public class DataController {
+    private final UserService userService;
+
+    @Autowired
+    public DataController(UserService userService) {
+        this.userService = userService;
+    }
 
     /**
      * Return gathered user data
@@ -25,15 +33,7 @@ public class DataController {
     @ResponseBody
     public HashMap<String,List<User>> getUserJson(){
         HashMap<String,List<User>> m = new HashMap<>();
-
-        ArrayList<User> list = new ArrayList<>();
-
-        User u = new User();
-        u.setId(23);
-        u.setName("sdgsd");
-        u.setPassword("sgsd");
-        list.add(u);
-        m.put("data",list);
+        m.put("data",userService.getUserList());
         return m;
     }
 }
