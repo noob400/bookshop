@@ -1,6 +1,7 @@
 package com.bookshop.controller;
 
 
+import com.bookshop.common.Constants;
 import com.bookshop.common.Utils;
 import com.bookshop.pojo.User;
 import com.bookshop.service.UserService;
@@ -26,44 +27,37 @@ public class DataController {
 
     @RequestMapping("user.json")
     @ResponseBody
-    public HashMap<String,List<User>> getUserData(){
-        HashMap<String,List<User>> m = new HashMap<>();
-        m.put("data",userService.getUserList());
-        return m;
+    public List<User> getUserData(){
+        return userService.getUserList();
     }
 
-    @RequestMapping(value = "/user/create.json", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/modify.json", method = RequestMethod.POST)
     @ResponseBody
-    public HashMap<String,String> createUserData(HttpServletRequest request){
-        HashMap<String,String> d = Utils.getStrippedRequestParams(request.getParameterMap());
-        System.out.println(d);
+    public int modifyUserData(HttpServletRequest request){
+        HashMap<String,String> d =Utils.getRequestMap(request.getParameterMap());
+        if(!d.containsKey("id")){
+            return Constants.RESULT_CODE_BAD_REQUEST;
+        }
 
-        HashMap<String,String> m = new HashMap<>();
-        m.put("data","ok");
-        return m;
-    }
-    @RequestMapping(value = "/user/update.json", method = RequestMethod.PUT)
-    @ResponseBody
-    public String updateUserData(@RequestBody String data,HttpServletRequest request){
+        if(userService.get(Integer.parseInt(d.get("id")))!=null){
+            //Update
+            userService.updateUser(d);
+        }else{
+            //Create
+            userService.createUser(d);
+        }
 
-        request.getParameterMap().forEach((a,b)->{
-            System.out.print("key:"+a+",value:");
-            for(String s:b){
-                System.out.print(s+",");
-            }
-        });
-        System.out.println(data);
-        return "ok";
+        return Constants.RESULT_CODE_SUCCESS;
     }
-    @RequestMapping(value = "/user/delete.json",method = RequestMethod.DELETE)
+
+    @RequestMapping(value = "/user/delete.json",method = RequestMethod.POST)
     @ResponseBody
-    public String deleteUserData(HttpServletRequest request){
-        request.getParameterMap().forEach((a,b)->{
-            System.out.print("key:"+a+",value:");
-            for(String s:b){
-                System.out.print(s+",");
-            }
-        });
-        return "ok";
+    public int deleteUserData(HttpServletRequest request){
+        if(request.getParameter("id")!=null){
+            userService.deleteUser(Integer.parseInt(request.getParameter("id")));
+            return Constants.RESULT_CODE_SUCCESS;
+        }else{
+            return Constants.RESULT_CODE_BAD_REQUEST;
+        }
     }
 }

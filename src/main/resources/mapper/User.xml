@@ -24,4 +24,22 @@
     <select id="getUserList" resultType="User">
         select * from user;
     </select>
+
+    <insert id="createUser" parameterType="User">
+        insert into user values (#{id},#{studentid},
+                                 #{name},#{password},
+                                #{sex},#{tel},#{address},#{major});
+    </insert>
+
+    <delete id="deleteUser" parameterType="_int">
+        delete from user where  id = #{id};
+    </delete>
+
+    <update id="updateUser" parameterType="User">
+        update user set studentid=#{studentid},
+                        name=#{name},password=#{password},
+                        sex=#{sex},tel=#{tel},address=#{address},
+                        major=#{major} where id=#{id};
+    </update>
+
 </mapper>

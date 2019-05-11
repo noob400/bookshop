@@ -12,10 +12,12 @@
 
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../../css/main.css" rel="stylesheet" type="text/css">
-    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css" rel="stylesheet">
-    <link href="../../../css/editor.dataTable.min.css" rel="stylesheet" type="text/css">
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
 
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -53,87 +55,118 @@
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Dashboard</h1>
-                <table id="dataTable" class="table table-striped">
-                    <thead>
-                    <tr>
-                        <c:forEach items="${requestScope.pageField}" var="fieldItem">
-                            <th>${fieldItem.value}</th>
-                        </c:forEach>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+            <div id="toolbar" class="btn-group">
+                <button id="btn_add" type="button" class="btn btn-default"
+                        data-toggle="modal" data-target="#edit_form">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                </button>
+                <button id="btn_edit" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+                </button>
+                <button id="btn_delete" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                </button>
+            </div>
+
+            <table  id="table"
+                    data-toggle="table"
+                    data-height="460"
+                    data-unique-id="id"
+                    data-click-to-select="true"
+                    data-search="true"
+                    data-side-pagination="server"
+                    data-pagination="true"
+                    data-url="/data/user.json">
+                <thead>
+                <tr>
+                    <th data-field="state" data-checkbox="true"></th>
+                    <c:forEach items="${requestScope.pageField}" var="item">
+                        <th data-field="${item.key}">${item.value}</th>
+                    </c:forEach>
+                </tr>
+                </thead>
+            </table>
         </div>
-    </div>
+        </div>
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <div class="modal fade" id="edit_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">${requestScope.pageName} - 新增</h4>
+                </div>
+                <div class="modal-body">
 
+                    <form class="form-horizontal" role="form" id="dform" onsubmit="return false" action="##" method="post">
+                    <c:forEach items="${requestScope.pageField}" var="field" >
+                        <div class="form-group">
+                            <label for="${field.key}" class="col-sm-2 control-label">${field.value}</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="${field.key}" name="${field.key}" class="form-control well" placeholder="请输入${field.value}"/>
+                            </div>
+                        </div>
+                    </c:forEach>
+                    </form>
 
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
-<script src="../../../js/dataTables.editor.min.js"></script>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button id="data_submit" type="submit" class="btn btn-primary" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 <script>
-    var editor; // use a global for the submit and return data rendering in the examples
-    $(document).ready(function () {
-        // 初始化编辑器
-        editor = new $.fn.dataTable.Editor( {
-            ajax: {
-                create: {
-                    type: 'POST',
-                    url:  '${requestScope.pageAPI}/create.json'
-                },
-                edit: {
-                    type: 'PUT',
-                    url:  '${requestScope.pageAPI}/update.json?id=_id_'
-                },
-                remove: {
-                    type: 'DELETE',
-                    url:  '${requestScope.pageAPI}/delete?id=_id_'
-                }
-            },
-            table: "#dataTable",
-            idSrc:  'id',
-            fields: [
-                <c:forEach items="${requestScope.pageField}" var="item1">
-                { label:"${item1.value}",name:"${item1.key}" },
-                </c:forEach>
-            ]
-        } );
+    var $table = $('#table');
+    var $data_submit = $('#data_submit');
+    var $btn_del = $('#btn_delete');
+    var $btn_edit = $('#btn_edit');
 
-        // 气泡编辑器
-        $('#dataTable').on( 'click', 'tbody td:not(:first-child)', function (e) {
-            editor.bubble( this );
-        } );
-
-        // DataTable初始化
-        $('#dataTable').DataTable({
-            dom: "Bfrtip",
-            processing: true,
-            serverSide: true,
-            paging:true,
-            ajax:"/data/user.json",
-            columns: [
-                <c:forEach items="${requestScope.pageField}" var="item">
-                { "data": "${item.key}" },
-                </c:forEach>
-            ],
-            order: [ 1, 'asc' ],
-            select: {
-                style:    'os',
-                selector: 'td:first-child'
-            },
-            buttons: [
-                { extend: "create", editor: editor, text:"新建" },
-                { extend: "edit",   editor: editor, text:"修改"},
-                { extend: "remove", editor: editor, text:"删除" }
-            ]
+    $(function() {
+        $data_submit.click(function () {
+            $.ajax({
+                url:"/data/user/modify.json",
+                type:"POST",
+                data: $('#dform').serialize()
+            })
         });
-    });
+
+        $btn_edit.click(function () {
+            var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
+                return row.id
+            });
+            var selected_data = $table.bootstrapTable('getRowByUniqueId', ids[0]);
+            console.log(selected_data);
+            <c:forEach items="${requestScope.pageField}" var="field" >
+            $('#${field.key}').val(selected_data.${field.key});
+            </c:forEach>
+            $('#edit_form').modal('show');
+
+        });
+
+
+        $btn_del.click(function () {
+            var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
+                $.ajax({
+                    url:"/data/user/delete.json",
+                    type:"POST",
+                    data: {id:row.id}
+                });
+                return row.id
+            });
+
+            $table.bootstrapTable('remove', {
+                field: 'id',
+                values: ids
+            })
+        })
+    })
+
 </script>
 </body>
 </html>

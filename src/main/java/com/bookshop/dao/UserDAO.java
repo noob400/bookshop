@@ -1,7 +1,9 @@
 package com.bookshop.dao;
 
 import com.bookshop.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface UserDAO {
@@ -15,5 +17,11 @@ public interface UserDAO {
     User getByStudentid(String studentid);
 
     List<User> getUserList();
+
+    void createUser(User u);
+
+    void updateUser(User u);
+
+    void deleteUser(int id);
 
 }

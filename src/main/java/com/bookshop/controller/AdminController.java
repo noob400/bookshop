@@ -71,6 +71,7 @@ public class AdminController {
         ModelAndView mav =new ModelAndView("admin/gather_book");
         mav.addObject("pageName","书籍管理");
         mav.addObject("pageAPI","/data/book");
+        // TODO:WRITE IT
         return mav;
     }
 
@@ -79,6 +80,7 @@ public class AdminController {
         ModelAndView mav =new ModelAndView("admin/gather_spare");
         mav.addObject("pageName","闲置物管理");
         mav.addObject("pageAPI","/data/spare");
+        // TODO:WRITE IT
         return mav;
     }
 
@@ -87,6 +89,7 @@ public class AdminController {
         ModelAndView mav =new ModelAndView("admin/gather_order");
         mav.addObject("pageName","订单管理");
         mav.addObject("pageAPI","/data/order");
+        // TODO:WRITE IT
         return mav;
     }
 }
