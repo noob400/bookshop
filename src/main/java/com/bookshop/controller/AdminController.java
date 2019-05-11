@@ -59,7 +59,7 @@ public class AdminController {
 
     @RequestMapping("/gather_user.do")
     public ModelAndView gatherUser(){
-        ModelAndView mav =new ModelAndView("admin/gather_user");
+        ModelAndView mav =new ModelAndView("admin/gather_template");
         mav.addObject("pageName","用户管理");
         mav.addObject("pageAPI","/data/user");
         mav.addObject("pageField",new LinkedHashMap<String,String>(){
@@ -79,16 +79,33 @@ public class AdminController {
 
     @RequestMapping("/gather_book.do")
     public ModelAndView gatherBook(){
-        ModelAndView mav =new ModelAndView("admin/gather_book");
+        ModelAndView mav =new ModelAndView("admin/gather_template");
         mav.addObject("pageName","书籍管理");
         mav.addObject("pageAPI","/data/book");
-        // TODO:WRITE IT
+        mav.addObject("pageField",new LinkedHashMap<String,String>(){
+            {
+                put("id","ID");
+                put("name","书名");
+                put("cid","类别编号");
+                put("bookType","类型");
+                put("price","单价");
+                put("originalPrice","原价");
+                put("uid","UID");
+                put("author","作者");
+                put("press","出版社");
+                put("version","版本");
+                put("degree","评分");
+                put("publishDate","出版日期");
+                put("description","描述");
+                put("date","日期");
+            }
+        });
         return mav;
     }
 
     @RequestMapping("/gather_spare.do")
     public ModelAndView gatherSpare(){
-        ModelAndView mav =new ModelAndView("admin/gather_spare");
+        ModelAndView mav =new ModelAndView("admin/gather_template");
         mav.addObject("pageName","闲置物管理");
         mav.addObject("pageAPI","/data/spare");
         // TODO:WRITE IT
@@ -97,7 +114,7 @@ public class AdminController {
 
     @RequestMapping("/gather_order.do")
     public ModelAndView gatherOrder(){
-        ModelAndView mav =new ModelAndView("admin/gather_order");
+        ModelAndView mav =new ModelAndView("admin/gather_template");
         mav.addObject("pageName","订单管理");
         mav.addObject("pageAPI","/data/order");
         // TODO:WRITE IT
