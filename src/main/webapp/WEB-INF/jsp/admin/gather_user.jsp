@@ -34,7 +34,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">登出</a></li>
+                <li><a href="logout">登出</a></li>
             </ul>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">
@@ -76,7 +76,7 @@
                     data-search="true"
                     data-side-pagination="server"
                     data-pagination="true"
-                    data-url="/data/user.json">
+                    data-url="${requestScope.pageAPI}.json">
                 <thead>
                 <tr>
                     <th data-field="state" data-checkbox="true"></th>
@@ -125,7 +125,7 @@
     function contain(elem,arr){
         if(arr!=null ){
             for(var i=0;i<arr.length;i++){}
-            if(arr[i]==elem){
+            if(arr[i]===elem){
                 return true;
             }
         }
@@ -141,7 +141,7 @@
         $data_submit.click(function () {
             // Post changing request
             $.ajax({
-                url:"/data/user/modify.json",
+                url:"${requestScope.pageAPI}/modify.json",
                 type:"POST",
                 data: $('#dform').serialize()
             });
@@ -179,7 +179,7 @@
         $btn_del.click(function () {
             var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
                 $.ajax({
-                    url:"/data/user/delete.json",
+                    url:"${requestScope.pageAPI}/delete.json",
                     type:"POST",
                     data: {id:row.id}
                 });

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.TreeMap;
@@ -44,6 +45,16 @@ public class AdminController {
                 this.put("admin", a.getName());
             }
         });
+    }
+
+    @RequestMapping(value = "/logout")
+    public  ModelAndView logout(HttpServletRequest request){
+        HttpSession s = request.getSession();
+        if(s!=null && s.getAttribute("admin")!=null){
+            s.removeAttribute("admin");
+        }
+        request.setAttribute("mode","admin");
+        return new  ModelAndView("login");
     }
 
     @RequestMapping("/gather_user.do")
