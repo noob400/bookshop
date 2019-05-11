@@ -122,6 +122,16 @@
 
 
 <script>
+    function contain(elem,arr){
+        if(arr!=null ){
+            for(var i=0;i<arr.length;i++){}
+            if(arr[i]==elem){
+                return true;
+            }
+        }
+        return false;
+    }
+
     var $table = $('#table');
     var $data_submit = $('#data_submit');
     var $btn_del = $('#btn_delete');
@@ -129,11 +139,27 @@
 
     $(function() {
         $data_submit.click(function () {
+            // Post changing request
             $.ajax({
                 url:"/data/user/modify.json",
                 type:"POST",
                 data: $('#dform').serialize()
-            })
+            });
+
+            // Fire UI
+            var row_id = $('#dform').val();
+            var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
+                return row.id
+            });
+
+            $table.bootstrapTable(contain(row_id,ids)?'updateRow':'insertRow', {
+                index: row_id,
+                row: {
+                    <c:forEach items="${requestScope.pageField}" var="field" >
+                    ${field.key}:$('#${field.key}').val(),
+                    </c:forEach>
+                }
+            });
         });
 
         $btn_edit.click(function () {
