@@ -60,7 +60,6 @@ public class OrderController {
             return ResultGenerator.genSuccessResult();
         }
 
-
     @RequestMapping("/intomyorders")
     public ModelAndView intomyorders(Order order,HttpServletRequest request){
         User user=(User)request.getSession().getAttribute("user");

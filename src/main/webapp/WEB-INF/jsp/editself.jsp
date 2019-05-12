@@ -44,7 +44,7 @@
 <!-- 个人信息 -->
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-<form action="/edit/changeselfmassege.do" method="post">
+<form  id="editform" onsubmit="return false" action="##" method="post">
           <div class="form-group">
               <label for="tel" >联系:</label>
             <input id="tel" class="form-control" name="tel" type="text" value="${user.getTel()}"></p>
@@ -57,9 +57,10 @@
            <label for="major" >年级专业：</label>
               <input name="major" class="form-control" id="major" type="text" value="${user.getMajor()}">
           </div>
-            <button  class="btn btn-default" type="submit">修改</button>
+            <button  class="btn btn-default" type="submit" onclick="login()">修改</button>
     <!-- person-info-end -->
 </form>
+        <p id="errorInfo"></p>
     </div>
 </div>
 <footer>
@@ -71,6 +72,32 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/myBookshelf.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/session.js"></script>
+<script>
+    function login() {
+        $('#errorInfo').html("");
+        var tel = $('#tel').val();
+        var address = $('#address').val();
+        var major = $('#major').val();
+        if (tel.length==0||address.length == 0 || major.length == 0) {
+            $('#errorInfo').html("请填全信息！");
+            return false;
+        }
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/edit/changeselfmassege.do" ,//url
+            data: $('#editform').serialize(),
+            success: function (result) {
+                location.href = "/edit/intoprofile";
 
+            },
+            error:function (result) {
+                console.log("haha");
+            }
+
+        });
+    }
+</script>
 </body>
 </html>

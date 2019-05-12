@@ -56,9 +56,9 @@
         <span class="book-price">
 				<p>售价 <a class="final-price">￥${book.getPrice()}</a></p>
 				<p>定价 <a class="original-price">￥${book.getOriginalPrice()} </a></p>
-				<p>品相 <a class="condition">${book.getDegree()}新</a></p>
 			</span>
         <span class="book-descr">
+                <p>品相 <a class="condition">${book.getDegree()}新</a></p>
 				<p>商品描述<a class="book-desc">${book.getDescription()}</a></p>
 				<p>上书时间<a class="upload-time">2018-03-20</a></p>
 			</span>
@@ -99,7 +99,7 @@
         var contactway = $('#contactway').val();
         var contactname = $('#contactname').val();
         if (counts.length==0||contactway.length == 0 || contactname.length == 0) {
-            $('#errorInfo').html("数量或联系方式或联系人不能为空！");
+            $('#errorInfo').html("请填全信息！");
             return false;
         }
         $.ajax({
