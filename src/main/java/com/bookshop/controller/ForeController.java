@@ -1,5 +1,7 @@
 package com.bookshop.controller;
 
+import com.bookshop.common.Result;
+import com.bookshop.common.ResultGenerator;
 import com.bookshop.pojo.*;
 import com.bookshop.service.BookService;
 import com.bookshop.service.CategoryService;
@@ -115,4 +117,5 @@ public class ForeController {
         mav.addObject("pageName","订单管理");
         return mav;
     }
+
 }

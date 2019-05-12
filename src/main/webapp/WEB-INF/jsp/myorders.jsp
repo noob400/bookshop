@@ -29,7 +29,6 @@
     <div class="nav-info">
         <a href="#" class="username">${user.getName()}</a>
         <a href="/myBookshelf.do" class="bookshelf">||&nbsp;&nbsp;&nbsp;我的书架</a>
-        <a href="/orders/intomyorders" class="order">||&nbsp;&nbsp;&nbsp;我的订单</a>
         <a href="#" class="logout">[ 退 出 ]</a>
     </div> <!-- nav-info-end -->
 </nav>
@@ -42,35 +41,25 @@
         <span class="tip"></span>
     </div> <!-- book-pic-end -->
 
-    <div id="book-info">
-        <span class="book-name">${book.getName()}</span>
-        <span class="book-publish">${book.getAuthor()} 著 / ${book.getPress()} / ${book.getPublishDate()} / ${book.getVersion()}</span>
-        <span class="book-price">
-				<p>售价 <a class="final-price">￥${book.getPrice()}</a></p>
-				<p>定价 <a class="original-price">￥${book.getOriginalPrice()} </a></p>
-				<p>品相 <a class="condition">${book.getDegree()}新</a></p>
-			</span>
-        <span class="book-descr">
-				<p>商品描述<a class="book-desc">${book.getDescription()}</a></p>
-				<p>上书时间<a class="upload-time">2018-03-20</a></p>
-			</span>
-        <span class="buy-now"><a href="/orders/order/${book.getId()}" >立即联系卖家进行购买</a></span>
-    </div> <!-- book-info-end -->
+    <div id="login-container">
+        <h2>请填写订单</h2>
+        <br />
+        <table>
+            <tr><td>订单号</td><td>书名</td><td>订单数量</td><td>联系方式</td><td>联系人</td><td>总价</td><td>订单状态</td></tr>
+            <c:forEach items="${orders}" var="orders">
+                <c:if test="${orders.orderid<0}">
+                    <tr><td>无</td><td>无</td><td>无</td><td>无</td>
+                        <td>无</td><td>无</td><td>无</td></tr>
+                </c:if>
+                <c:if test="${orders.orderid>0}">
+                    <tr><td>${orders.orderid}</td><td>${orders.bookname}</td><td>${orders.counts}</td><td>${orders.contactway}</td>
+                    <td>${orders.contactname}</td><td>${orders.price}元</td><td><a href="pay.do">${orders.orderstatus}</a></td></tr>
+                </c:if>
+                </c:forEach>
+        </table>
+        <p id="errorInfo"></p>
+    </div>
 
-    <div id="seller-info">
-        <a class="seller-name">${book.getUser().getName()}</a>
-        <span class="seller-span1">
-				联系<a class="seller-chat">在线联系</a>
-			</span>
-        <span class="seller-span2">
-				<p>电话<a class="seller-num">${book.getUser().getTel()}</a></p>
-				<p>宿舍<a class="seller-adr">${book.getUser().getAddress()}</a></p>
-				<p>好评率<a class="seller-appraise">90.5%</a></p>
-			</span>
-        <span class="seller-span3">
-				<p>[ 去看看卖家的二手书 ]</p>
-			</span>
-    </div><!-- seller-info-end -->
     <div id="book-content">
         <span class="book-tip">目送共由七十四篇散文组成，是为一本极具亲情、感人至深的文集。由父亲的逝世、母亲的苍老、儿子的离开、朋友的牵挂、兄弟的携手共行，写出失败和脆弱、失落和放手，写出缠绵不舍和绝然的虚无。正如作者所说：“我慢慢地、慢慢地了解到，所谓父女母子一场，只不过意味着，你和他的缘分就是今生今世不断地在目送他的背影。</span>
     </div>
@@ -79,6 +68,7 @@
     <a href="#">©2018-2019 二手书交易</a>
     <a href="#">意见反馈&nbsp;&nbsp;&nbsp;联系我们&nbsp;&nbsp;&nbsp;隐私权声明&nbsp;&nbsp;&nbsp;使用条款</a>
 </footer>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/session.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.js"></script>
+
 </body>
 </html>

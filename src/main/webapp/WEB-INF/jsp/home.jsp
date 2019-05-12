@@ -13,6 +13,7 @@
         <div class="nav-info">
             <a href="#" class="username">${user.getName()}</a>
             <a href="/myBookshelf.do" class="bookshelf">||&nbsp;&nbsp;&nbsp;我的书架</a>
+            <a href="/orders/intomyorders" class="order">||&nbsp;&nbsp;&nbsp;我的订单</a>
             <a href="#" class="logout">[ 退 出 ]</a>
         </div> <!-- nav-info -->
         <form action="searchBook.do" method="post">
@@ -69,7 +70,7 @@
                 <c:forEach items="${books.value}" var="book" varStatus="bookStatus">
                 <li class="book-list">
                     <%--<a href="bookDetail.do?id=${book.getId()}" class="book-pic" target="_blank">--%>
-                    <a href="/books/${book.getId()}" class="book-pic" target="_blank">
+                    <a href="/books/${book.getId()}" class="book-pic" >
                         <img src="<%=request.getContextPath()%>/img/book-list/article/${book.getBookImage().getId()}.jpg">
                     </a>
                     <a href="#" class="book-info">
@@ -77,7 +78,7 @@
                         <span class="book-detail">${book.getDescription()}</span>
                     </a>
                     <span class="book-price">￥${book.getPrice()}
-                            <a href="#" class="book-buy">立即下单</a>
+                            <a href="/orders/order/${book.getId()}" class="book-buy">立即下单</a>
                         </span>
                 </li>
                 </c:forEach>

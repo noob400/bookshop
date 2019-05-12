@@ -30,6 +30,7 @@
     <div class="nav-info">
         <a href="#" class="username">${user.getName()}</a>
         <a href="/myBookshelf.do" class="bookshelf">||&nbsp;&nbsp;&nbsp;我的书架</a>
+        <a href="/orders/intomyorders" class="order">||&nbsp;&nbsp;&nbsp;我的订单</a>
         <a href="#" class="logout">[ 退 出 ]</a>
     </div> <!-- nav-info-end -->
 </nav>
@@ -39,12 +40,11 @@
     <p>
         <a href="#" class="name">${user.getName()}</a>
     </p>
-    <input type="hidden" id="sexInput" value="${user.getSex()}">
     <p>
-        <a href="#" class="sex" id="sexText">女</a><img src="<%=request.getContextPath()%>/img/girl.png" id="sex-pic">
+        <a href="#" class="sex" >${user.getSex()}</a>
     </p>
     <p class="set">
-        <a href="#" class="edit">编辑个人主页</a>
+        <a href="/edit/editself.do" class="edit">编辑个人主页</a>
         <img class="set-icon" src="<%=request.getContextPath()%>/img/setting.png">
     </p>
     <div class="contact">
@@ -65,7 +65,7 @@
 
 <!-- 书摊和求书选项卡 -->
 <div class="card-btn">
-    <span title="sell-book" id="sell-btn" class="active">我的书摊</span>
+    <span title="sell-book" id="sell-btn" class="active">闲置物出售</span>
     <span title="ask-book" id="ask-btn">我的求书</span>
     <p class="upload-icon"></p>
     <a id="sell-upload" href="goUpload.do?bookType=1">上传书至书摊</a>

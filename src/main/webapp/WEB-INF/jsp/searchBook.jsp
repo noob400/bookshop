@@ -14,6 +14,7 @@
         <div class="nav-info">
             <a href="#" class="username">chiemin</a>
             <a href="/myBookshelf.do" class="bookshelf">||&nbsp;&nbsp;&nbsp;我的书架</a>
+            <a href="/orders/intomyorders" class="order">||&nbsp;&nbsp;&nbsp;我的订单</a>
             <a href="#" class="logout">[ 退 出 ]</a>
         </div> <!-- nav-info -->
         <form action="searchBook.do" method="post">

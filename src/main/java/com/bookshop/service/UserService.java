@@ -9,6 +9,6 @@ public interface UserService {
     boolean checkUser(User user);
     User get(int id);
     User getByStudentid(String studnetid);
-
+    void update(User user);
     List<User> getUserList();
 }

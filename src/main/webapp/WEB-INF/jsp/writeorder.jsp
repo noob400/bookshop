@@ -2,6 +2,9 @@
          pageEncoding="UTF-8" import="java.util.*" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    boolean isAdminMode =request.getAttribute("mode")!=null && request.getAttribute("mode").equals("admin");
+%>
 <html>
 <head>
     <title>${book.getName()}</title>
@@ -42,20 +45,17 @@
         <span class="tip"></span>
     </div> <!-- book-pic-end -->
 
-    <div id="book-info">
-        <span class="book-name">${book.getName()}</span>
-        <span class="book-publish">${book.getAuthor()} 著 / ${book.getPress()} / ${book.getPublishDate()} / ${book.getVersion()}</span>
-        <span class="book-price">
-				<p>售价 <a class="final-price">￥${book.getPrice()}</a></p>
-				<p>定价 <a class="original-price">￥${book.getOriginalPrice()} </a></p>
-				<p>品相 <a class="condition">${book.getDegree()}新</a></p>
-			</span>
-        <span class="book-descr">
-				<p>商品描述<a class="book-desc">${book.getDescription()}</a></p>
-				<p>上书时间<a class="upload-time">2018-03-20</a></p>
-			</span>
-        <span class="buy-now"><a href="/orders/order/${book.getId()}" >立即联系卖家进行购买</a></span>
-    </div> <!-- book-info-end -->
+    <div id="login-container">
+        <h2><%=isAdminMode?"管理员登录":"用户登录"%> | 校园二手书交易平台</h2>
+        <br />
+        <form id="form" action="/orders/addorder">
+            <input type="text" id="counts" name="counts" placeholder="数量"><br>
+            <input type="text" id="contactway" name="contactway" placeholder="联系方式"><br/>
+            <input type="text" id="contactname" name="contactname" placeholder="联系人"><br/>
+            <button  id="order-button" type="submit">提交</button><br/>
+        </form>
+        <p id="errorInfo"></p>
+    </div>
 
     <div id="seller-info">
         <a class="seller-name">${book.getUser().getName()}</a>
@@ -79,6 +79,7 @@
     <a href="#">©2018-2019 二手书交易</a>
     <a href="#">意见反馈&nbsp;&nbsp;&nbsp;联系我们&nbsp;&nbsp;&nbsp;隐私权声明&nbsp;&nbsp;&nbsp;使用条款</a>
 </footer>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/session.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.js"></script>
+
 </body>
 </html>
