@@ -111,4 +111,18 @@ public class ForeController {
         return mav;
     }
 
+    @RequestMapping("/new_spare.do")
+    public ModelAndView newSpare(Spare s, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("askBookStore");
+        List<Spare> spares = spareDAO.getAllSpare();
+        mav.addObject("spare", spares);
+
+        User u = (User) request.getSession().getAttribute("user");
+        if (u != null) {
+            s.setUid(u.getId());
+            spareDAO.insertSpare(s);
+        }
+        return mav;
+    }
+
 }

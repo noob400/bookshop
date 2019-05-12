@@ -45,7 +45,7 @@
 <!-- 图书分类 -->
 <div id="container">
     <div id="book-container">
-        <h3 class="book-title"><a href="#">| 所有求书信息</a></h3>
+        <h3 class="book-title"><a href="#">| 闲置物广场</a></h3>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -65,6 +65,9 @@
                         <td>${s.name}</td>
                         <td>${s.price}</td>
                         <td>${s.description}</td>
+                        <th>
+                            <button type="submit" class="btn btn-primary">我要购买</button>
+                        </th>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -72,12 +75,64 @@
         </div>
     </div> <!-- book-container end-->
     <span class="page-btn">
-			<a href="?start=0" class="page-top">首页</a>
-			<a href="?start=${page.getStart()-page.getCount()}" class="page-pre">上一页</a>
-			<a href="?start=${page.getStart()+page.getCount()}" class="page-next">下一页</a>
-			<a href="?start=${page.getEnd()}" class="page-end">尾页</a>
-		</span>
+        <a href="?start=0" class="page-top">首页</a>
+        <a href="?start=${page.getStart()-page.getCount()}" class="page-pre">上一页</a>
+        <a href="?start=${page.getStart()+page.getCount()}" class="page-next">下一页</a>
+        <a href="?start=${page.getEnd()}" class="page-end">尾页</a>
+           <a type="button" class="btn btn-info" data-toggle="modal" data-target="#edit_form">我要发布</a>
+    </span>
+    <!-- Contextual button for informational alert messages -->
+
 </div><!-- container end-->
+
+
+<div class="modal fade" id="edit_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">发布我的闲置物</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" role="form" id="dform" action="/new_spare.do" method="post">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">闲置物名</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="name" name="name" class="form-control well" placeholder="请输入名字"/>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="price" class="col-sm-2 control-label">预期价格</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="price" name="price" class="form-control well" placeholder="请输入价格"/>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="description" class="col-sm-2 control-label">物品描述</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="description" name="description" class="form-control well"
+                                   placeholder="请输入描述"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary">确定</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
 <footer>
     <a href="#">©2018-2019 二手书交易</a>
     <a href="#">意见反馈&nbsp;&nbsp;&nbsp;联系我们&nbsp;&nbsp;&nbsp;隐私权声明&nbsp;&nbsp;&nbsp;使用条款</a>

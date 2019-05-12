@@ -9,4 +9,9 @@
         select *
         from spare;
     </select>
+
+    <insert id="insertSpare" parameterType="Spare">
+        insert into spare
+        values (0, #{uid}, #{name}, #{price}, #{description})
+    </insert>
 </mapper>

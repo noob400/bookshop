@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface SpareDAO {
     List<Spare> getAllSpare();
+
+    void insertSpare(Spare s);
 }
