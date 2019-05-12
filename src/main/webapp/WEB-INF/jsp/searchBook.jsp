@@ -30,7 +30,7 @@
         <ul class="menu">
             <li><a href="/home.do">首页</a></li>
             <li><a href="/goBookStore.do">书籍良品</a></li>
-            <li><a href="/goAskBookStore.do">求书区</a></li>
+            <li><a href="/goAskBookStore.do">闲置物区</a></li>
         </ul>
     </nav>
     <div class="askBook-pic"></div>

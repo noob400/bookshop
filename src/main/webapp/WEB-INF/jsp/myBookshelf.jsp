@@ -15,7 +15,7 @@
         <ul class="menu">
             <li><a class="active" href="/home.do">首页</a></li>
             <li><a href="/goBookStore.do">书籍良品</a></li>
-            <li><a href="/goAskBookStore.do">求书区</a></li>
+            <li><a href="/goAskBookStore.do">闲置物区</a></li>
         </ul>
     </div><!-- nav-menu -->
 
@@ -62,13 +62,12 @@
     </div>
 </div><!-- person-info-end -->
 
-<!-- 书摊和求书选项卡 -->
+<!-- 书摊和闲置物区选项卡 -->
 <div class="card-btn">
-    <span title="sell-book" id="sell-btn" class="active">闲置物出售</span>
-    <span title="ask-book" id="ask-btn">我的求书</span>
+    <span title="sell-book" id="sell-btn" class="active">我的书摊</span>
+    <span title="ask-book" id="ask-btn">我的订单</span>
     <p class="upload-icon"></p>
     <a id="sell-upload" href="goUpload.do?bookType=1">上传书至书摊</a>
-    <a id="ask-upload" href="goUpload.do?bookType=0">上传求书信息</a>
     <a id="delete-book" href="#">删除二手书</a>
 </div>
 
@@ -98,7 +97,7 @@
         </ul>
     </div> <!-- sell-book-end -->
 
-    <!-- 我的求书 -->
+    <!-- 我的闲置物区 -->
     <div id="ask-book">
         <ul class="book-ul">
             <c:forEach items="${askBooks}" var="askBook" varStatus="askBookStatus">

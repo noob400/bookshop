@@ -1,14 +1,13 @@
 package com.bookshop.controller;
 
-import com.bookshop.common.Result;
-import com.bookshop.common.ResultGenerator;
+import com.bookshop.dao.SpareDAO;
 import com.bookshop.pojo.*;
 import com.bookshop.service.BookService;
 import com.bookshop.service.CategoryService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +16,8 @@ import java.util.Map;
 
 @Controller
 public class ForeController {
+    @Autowired
+    private SpareDAO spareDAO;
 
     @Autowired
     private BookService bookService;
@@ -77,16 +78,8 @@ public class ForeController {
     @RequestMapping("/goAskBookStore.do")
     public ModelAndView goAskBookStore(Page page){
         ModelAndView mav = new ModelAndView("askBookStore");
-        int total = bookService.count();
-        page.calculateEnd(total);
-        if (page.getStart() < 0) {
-            page.setStart(0);
-        }else if (page.getStart() > total){
-            page.setEnd(page.getEnd());
-        }
-        PageHelper.offsetPage(page.getStart(),16);
-        List<Book> books = bookService.listByBookType(0);
-        mav.addObject("books",books);
+        List<Spare> spares = spareDAO.getAllSpare();
+        mav.addObject("spare", spares);
         return mav;
     }
 

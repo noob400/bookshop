@@ -15,7 +15,7 @@
         <ul class="menu">
             <li><a class="active" href="/home.do">首页</a></li>
             <li><a href="/goBookStore.do">书籍良品</a></li>
-            <li><a href="/goAskBookStore.do">求书区</a></li>
+            <li><a href="/goAskBookStore.do">闲置物区</a></li>
         </ul>
     </div><!-- nav-menu -->
 
@@ -34,8 +34,8 @@
     </div> <!-- nav-info-end -->
 </nav>
 <div class="titleName">
-    <h3>上传求书信息</h3>
-    <p>设求书信息</p>
+    <h3>上传闲置物信息</h3>
+    <p>设闲置物信息</p>
 </div>
 
 <div class="ask container">

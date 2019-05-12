@@ -4,10 +4,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>求书区</title>
+    <title>闲置物区</title>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/book.css">
+
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+
 <!-- 导航 -->
 <header>
     <nav class="navbar">
@@ -30,7 +37,7 @@
         <ul class="menu">
             <li><a href="/home.do">首页</a></li>
             <li><a href="/goBookStore.do">书籍良品</a></li>
-            <li><a class="active" href="/goAskBookStore.do">求书区</a></li>
+            <li><a class="active" href="/goAskBookStore.do">闲置物区</a></li>
         </ul>
     </nav>
     <div class="askBook-pic"></div>
@@ -39,23 +46,30 @@
 <div id="container">
     <div id="book-container">
         <h3 class="book-title"><a href="#">| 所有求书信息</a></h3>
-        <ul class="book-lists">
-            <c:forEach items="${books}" var="book" varStatus="bookStatus">
-            <li class="book-list">
-                <a href="bookDetail.do?id=${book.getId()}" class="book-pic" target="_blank">
-                    <img src="<%=request.getContextPath()%>/img/book-list/article/${book.getBookImage().getId()}.jpg">
-                </a>
-                <a href="#" class="book-info">
-                    <h5 class="book-name">${book.getName()}</h5>
-                    <span class="book-detail">${book.getDescription()}</span>
-                </a>
-                <span class="book-price">￥${book.getPrice()}
-						<a href="#" class="book-buy">立即下单</a>
-                </span>
-            </li>
-            </c:forEach>
-
-        </ul><!--  book-list end -->
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>闲置物ID</th>
+                    <th>发布者</th>
+                    <th>物品名字</th>
+                    <th>价格</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${requestScope.spare}" var="s" varStatus="bookStatus">
+                    <tr>
+                        <td>${s.id}</td>
+                        <td>${s.uid}</td>
+                        <td>${s.name}</td>
+                        <td>${s.price}</td>
+                        <td>${s.description}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </div> <!-- book-container end-->
     <span class="page-btn">
 			<a href="?start=0" class="page-top">首页</a>

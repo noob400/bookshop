@@ -17,7 +17,9 @@
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
-
+-- ----------------------------
+-- Table structure for ordertable
+-- ----------------------------
  create table ordertable(orderid int primary key auto_increment,
  bookname varchar(50),
  userid varchar(50),
@@ -27,7 +29,37 @@ SET FOREIGN_KEY_CHECKS = 0;
  price double,
  orderstatus varchar(50))default charset=utf8;
 
+-- ----------------------------
+-- Table structure for spare
+-- ----------------------------
+drop table if exists spare;
+create table spare
+(
+  id          int auto_increment,
+  uid         int          not null,
+  name        varchar(255) not null,
+  price       decimal      not null,
+  description text         null,
+  constraint spare_id_uindex
+  unique (id),
+  constraint spare_user_id_fk
+  foreign key (uid) references user (id)
+);
 
+alter table spare
+  add primary key (id);
+-- ----------------------------
+-- Records of spare
+-- ----------------------------
+
+INSERT INTO bookshop.spare (id, uid, name, price, description)
+VALUES (1, 99, '自行车', 350, '横不错');
+INSERT INTO bookshop.spare (id, uid, name, price, description)
+VALUES (2, 4, '汽车', 5432523523, '相当不错');
+INSERT INTO bookshop.spare (id, uid, name, price, description)
+VALUES (3, 4, '火箭', 325235235, '还是很不错');
+INSERT INTO bookshop.spare (id, uid, name, price, description)
+VALUES (4, 111, '书架', 446, '一般吧');
 -- ----------------------------
 -- Table structure for admin
 -- ----------------------------
