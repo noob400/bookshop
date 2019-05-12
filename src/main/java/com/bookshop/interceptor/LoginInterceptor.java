@@ -44,6 +44,20 @@ public class LoginInterceptor implements HandlerInterceptor{
             request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 
             return false;
+        }else if(url.contains("/admin")){
+            // 如果是管理员登录则直接放行
+            if(url.contains("checkLogin")){
+                return true;
+            }
+
+            // 否则根据是否登录进行拦截
+            if(request.getSession().getAttribute("admin")!=null){
+                return true;
+            }
+
+            request.setAttribute("mode","admin");
+            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+            return false;
         }
         return true;
     }

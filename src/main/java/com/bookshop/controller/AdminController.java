@@ -3,6 +3,7 @@ package com.bookshop.controller;
 import com.bookshop.common.Result;
 import com.bookshop.common.ResultGenerator;
 import com.bookshop.pojo.Admin;
+import com.bookshop.pojo.User;
 import com.bookshop.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.TreeMap;
 
 
 @RequestMapping("/admin")
@@ -41,5 +45,79 @@ public class AdminController {
                 this.put("admin", a.getName());
             }
         });
+    }
+
+    @RequestMapping(value = "/logout")
+    public  ModelAndView logout(HttpServletRequest request){
+        HttpSession s = request.getSession();
+        if(s!=null && s.getAttribute("admin")!=null){
+            s.removeAttribute("admin");
+        }
+        request.setAttribute("mode","admin");
+        return new  ModelAndView("login");
+    }
+
+    @RequestMapping("/gather_user.do")
+    public ModelAndView gatherUser(){
+        ModelAndView mav =new ModelAndView("admin/gather_template");
+        mav.addObject("pageName","用户管理");
+        mav.addObject("pageAPI","/data/user");
+        mav.addObject("pageField",new LinkedHashMap<String,String>(){
+            {
+                put("id","ID");
+                put("studentid","学号");
+                put("name","姓名");
+                put("password","密码");
+                put("sex","性别");
+                put("tel","电话");
+                put("address","地址");
+                put("major","专业");
+            }
+        });
+        return mav;
+    }
+
+    @RequestMapping("/gather_book.do")
+    public ModelAndView gatherBook(){
+        ModelAndView mav =new ModelAndView("admin/gather_template");
+        mav.addObject("pageName","书籍管理");
+        mav.addObject("pageAPI","/data/book");
+        mav.addObject("pageField",new LinkedHashMap<String,String>(){
+            {
+                put("id","ID");
+                put("name","书名");
+                put("cid","类别编号");
+                put("bookType","类型");
+                put("price","单价");
+                put("originalPrice","原价");
+                put("uid","UID");
+                put("author","作者");
+                put("press","出版社");
+                put("version","版本");
+                put("degree","评分");
+                put("publishDate","出版日期");
+                put("description","描述");
+                put("date","日期");
+            }
+        });
+        return mav;
+    }
+
+    @RequestMapping("/gather_spare.do")
+    public ModelAndView gatherSpare(){
+        ModelAndView mav =new ModelAndView("admin/gather_template");
+        mav.addObject("pageName","闲置物管理");
+        mav.addObject("pageAPI","/data/spare");
+        // TODO:WRITE IT
+        return mav;
+    }
+
+    @RequestMapping("/gather_order.do")
+    public ModelAndView gatherOrder(){
+        ModelAndView mav =new ModelAndView("admin/gather_template");
+        mav.addObject("pageName","订单管理");
+        mav.addObject("pageAPI","/data/order");
+        // TODO:WRITE IT
+        return mav;
     }
 }

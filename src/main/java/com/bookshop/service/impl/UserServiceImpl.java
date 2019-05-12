@@ -1,11 +1,14 @@
 package com.bookshop.service.impl;
 
+import com.bookshop.common.Utils;
 import com.bookshop.dao.UserDAO;
 import com.bookshop.pojo.User;
 import com.bookshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -36,6 +39,18 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void update(User user){userDAO.update(user);}
+    public void createUser(HashMap<String,String> m) {
+        userDAO.createUser(Utils.fillObjectFromMap(new User(),m));
+    }
+
+    @Override
+    public void deleteUser(int id) {
+        userDAO.deleteUser(id);
+    }
+
+    @Override
+    public void updateUser(HashMap<String, String> params) {
+        userDAO.updateUser(Utils.fillObjectFromMap(new User(),params));
+    }
 
 }

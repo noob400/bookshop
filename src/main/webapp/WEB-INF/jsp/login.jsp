@@ -50,7 +50,7 @@
                 success: function (result) {
                     if (result.resultCode === 200) {
                         event.preventDefault();
-                        location.href = '<%=isAdminMode?"gather_user.do":"home.do"%>';
+                        location.href = '<%=isAdminMode?"/admin/gather_user.do":"/home.do"%>';
                     } else {
                         event.preventDefault();
                         $('#errorInfo').html(result.message);
