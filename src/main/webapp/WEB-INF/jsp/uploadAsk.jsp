@@ -84,9 +84,6 @@
             url:"upload.do",
             async:false,
             dataType:"json",
-            success:function(data){
-                status = data.msg;
-            }
         });
 
         if (status == "1"){

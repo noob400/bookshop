@@ -10,6 +10,13 @@
     <title>${book.getName()}</title>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reset.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/bookDetail.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
 <nav class="navbar">
@@ -43,42 +50,71 @@
         </div>
         <span class="tip"></span>
     </div> <!-- book-pic-end -->
+    <div id="book-info">
+        <span class="book-name">${book.getName()}</span>
+        <span class="book-publish">${book.getAuthor()} 著 / ${book.getPress()} / ${book.getPublishDate()} / ${book.getVersion()}</span>
+        <span class="book-price">
+				<p>售价 <a class="final-price">￥${book.getPrice()}</a></p>
+				<p>定价 <a class="original-price">￥${book.getOriginalPrice()} </a></p>
+				<p>品相 <a class="condition">${book.getDegree()}新</a></p>
+			</span>
+        <span class="book-descr">
+				<p>商品描述<a class="book-desc">${book.getDescription()}</a></p>
+				<p>上书时间<a class="upload-time">2018-03-20</a></p>
+			</span>
+        <span class="buy-now"><a href="/orders/order/${book.getId()}" >立即联系卖家进行购买</a></span>
+    </div> <!-- book-info-end -->
 
     <div id="login-container">
-        <h2><%=isAdminMode?"管理员登录":"用户登录"%> | 校园二手书交易平台</h2>
+        <h3 class="book-title"><a href="#">| 填写订单</a></h3>
         <br />
-        <form id="form" action="/orders/addorder">
-            <input type="text" id="counts" name="counts" placeholder="数量"><br>
-            <input type="text" id="contactway" name="contactway" placeholder="联系方式"><br/>
-            <input type="text" id="contactname" name="contactname" placeholder="联系人"><br/>
-            <button  id="order-button" type="submit">提交</button><br/>
+        <form id="form" onsubmit="return false" action="##" method="post">
+            <div class="form-group">
+                <label for="counts">购买数量</label>
+                <input type="text" class="form-control" id="counts" name="counts" placeholder="数量">
+            </div>
+            <div class="form-group">
+                <label for="contactway">联系方式</label>
+            <input type="text" class="form-control" id="contactway" name="contactway" placeholder="联系方式">
+            </div>
+            <div class="form-group">
+                <label for="contactname">联系人</label>
+            <input type="text" class="form-control" id="contactname" name="contactname" placeholder="联系人">
+            </div>
+            <button  id="order-button" class="btn btn-default" type="submit" onclick="login()">提交</button><br/>
         </form>
         <p id="errorInfo"></p>
     </div>
 
-    <div id="seller-info">
-        <a class="seller-name">${book.getUser().getName()}</a>
-        <span class="seller-span1">
-				联系<a class="seller-chat">在线联系</a>
-			</span>
-        <span class="seller-span2">
-				<p>电话<a class="seller-num">${book.getUser().getTel()}</a></p>
-				<p>宿舍<a class="seller-adr">${book.getUser().getAddress()}</a></p>
-				<p>好评率<a class="seller-appraise">90.5%</a></p>
-			</span>
-        <span class="seller-span3">
-				<p>[ 去看看卖家的二手书 ]</p>
-			</span>
-    </div><!-- seller-info-end -->
-    <div id="book-content">
-        <span class="book-tip">目送共由七十四篇散文组成，是为一本极具亲情、感人至深的文集。由父亲的逝世、母亲的苍老、儿子的离开、朋友的牵挂、兄弟的携手共行，写出失败和脆弱、失落和放手，写出缠绵不舍和绝然的虚无。正如作者所说：“我慢慢地、慢慢地了解到，所谓父女母子一场，只不过意味着，你和他的缘分就是今生今世不断地在目送他的背影。</span>
-    </div>
 </div><!--  container -->
 <footer>
-    <a href="#">©2018-2019 二手书交易</a>
-    <a href="#">意见反馈&nbsp;&nbsp;&nbsp;联系我们&nbsp;&nbsp;&nbsp;隐私权声明&nbsp;&nbsp;&nbsp;使用条款</a>
+    <p align="center" href="#">©2018-2019 二手书交易</p>
+    <p align="center" href="#">意见反馈&nbsp;&nbsp;&nbsp;联系我们&nbsp;&nbsp;&nbsp;隐私权声明&nbsp;&nbsp;&nbsp;使用条款</p>
 </footer>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.js"></script>
+<script>
+    function login() {
+        $('#errorInfo').html("");
+        var counts = $('#counts').val();
+        var contactway = $('#contactway').val();
+        var contactname = $('#contactname').val();
+        if (counts.length==0||contactway.length == 0 || contactname.length == 0) {
+            $('#errorInfo').html("数量或联系方式或联系人不能为空！");
+            return false;
+        }
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/orders/addorder" ,//url
+            data: $('#form').serialize(),
+            success: function (result) {
+                    location.href = "/orders/intomyorders";
 
+            }
+
+        });
+    }
+</script>
 </body>
 </html>

@@ -61,7 +61,7 @@
                     <span class="book-detail">${book.getDescription()}</span>
                 </a>
                 <span class="book-price">￥${book.getPrice()}
-						<a href="#" class="book-buy">立即下单</a>
+						<a href="/orders/order/${book.getId()}" class="book-buy">立即下单</a>
                 </span>
             </li>
             </c:forEach>

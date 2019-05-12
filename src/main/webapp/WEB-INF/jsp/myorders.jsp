@@ -7,6 +7,9 @@
     <title>${book.getName()}</title>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reset.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/bookDetail.css">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <nav class="navbar">
@@ -33,18 +36,14 @@
 </nav>
 
 <div class="container">
-    <div id="book-pic">
-        <div class="book-big">
-            <img src="<%=request.getContextPath()%>/img/book-list/article/${book.getBookImage().getId()}.jpg">
-        </div>
-        <span class="tip"></span>
-    </div> <!-- book-pic-end -->
-
-    <div id="login-container">
-        <h2>请填写订单</h2>
-        <br />
-        <table>
+    <div id="book-container">
+        <h3 class="book-title"><a href="#">| 订单列表</a></h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
             <tr><td>订单号</td><td>书名</td><td>订单数量</td><td>联系方式</td><td>联系人</td><td>总价</td><td>订单状态</td></tr>
+            </thead>
+            <tbody>
             <c:forEach items="${orders}" var="orders">
                 <c:if test="${orders.orderid<0}">
                     <tr><td>无</td><td>无</td><td>无</td><td>无</td>
@@ -55,17 +54,24 @@
                     <td>${orders.contactname}</td><td>${orders.price}元</td><td><a href="pay.do">${orders.orderstatus}</a></td></tr>
                 </c:if>
                 </c:forEach>
+            </tbody>
         </table>
-        <p id="errorInfo"></p>
     </div>
-
-    <div id="book-content">
-        <span class="book-tip">目送共由七十四篇散文组成，是为一本极具亲情、感人至深的文集。由父亲的逝世、母亲的苍老、儿子的离开、朋友的牵挂、兄弟的携手共行，写出失败和脆弱、失落和放手，写出缠绵不舍和绝然的虚无。正如作者所说：“我慢慢地、慢慢地了解到，所谓父女母子一场，只不过意味着，你和他的缘分就是今生今世不断地在目送他的背影。</span>
     </div>
+    <footer>
+        <div align="center">
+      <span  class="page-btn">
+			<a href="?start=0" class="page-top">首页</a>
+			<a href="?start=${page.getStart()-page.getCount()}" class="page-pre">上一页</a>
+			<a href="?start=${page.getStart()+page.getCount()}" class="page-next">下一页</a>
+			<a href="?start=${page.getEnd()}" class="page-end">尾页</a>
+		</span>
+        </div>
+        </footer>
 </div><!--  container -->
-<footer>
-    <a href="#">©2018-2019 二手书交易</a>
-    <a href="#">意见反馈&nbsp;&nbsp;&nbsp;联系我们&nbsp;&nbsp;&nbsp;隐私权声明&nbsp;&nbsp;&nbsp;使用条款</a>
+<footer >
+    <p align="center" href="#">©2018-2019 二手书交易</p>
+    <p align="center" href="#">意见反馈&nbsp;&nbsp;&nbsp;联系我们&nbsp;&nbsp;&nbsp;隐私权声明&nbsp;&nbsp;&nbsp;使用条款</p>
 </footer>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.js"></script>
 

@@ -34,10 +34,6 @@ public class OrderController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/sessions",method = RequestMethod.POST)
-    public Result ordersession(){
-        return ResultGenerator.genSuccessResult();
-    }
     @RequestMapping(value = "/order/{id}",method = RequestMethod.GET)
     public ModelAndView placeorder(@PathVariable("id") String id ,HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("writeorder");
@@ -51,7 +47,8 @@ public class OrderController {
     }
 
     @RequestMapping("/addorder")
-    public ModelAndView addorder( Order order,HttpServletRequest request) {
+    @ResponseBody
+    public Result addorder( Order order,HttpServletRequest request) {
             User user = (User) request.getSession().getAttribute("user");
             Book currentbook = (Book) request.getSession().getAttribute("currentbook");
             order.setPrice(currentbook.getPrice()*order.getCounts());
@@ -59,9 +56,8 @@ public class OrderController {
             order.setUserid(user.getStudentid());
             orderService.addorders(order);
             List<Order> orderlist = orderService.get(order);
-            ModelAndView mav = new ModelAndView("myorders");
-            mav.addObject("orders", orderlist);
-            return mav;
+            request.getSession().setAttribute("orders",orderlist);
+            return ResultGenerator.genSuccessResult();
         }
 
 

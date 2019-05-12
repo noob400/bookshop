@@ -7,6 +7,13 @@
     <title>我的书架</title>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reset.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/myBookshelf.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
 <!-- 导航条 -->
@@ -34,44 +41,30 @@
     </div> <!-- nav-info-end -->
 </nav>
 
-
-<form action="/edit/changeselfmassege.do" method="post" enctype="multipart/form-data" id="bookForm" class="upload-form">
-<div class="person-info">
-    <p>
-        <a href="#" class="name">${user.getName()}</a>
-    </p>
-    <p>
-        <a href="#" class="sex" >${user.getSex()}</a>
-    </p>
-    <div class="contact">
-        <p>
-            <span class="call-icon"></span>
-            联&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;系：
-            <input name="tel" type="text" value="${user.getTel()}"></p>
-        <p>
-            <span class="address-icon"></span>
-            住&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址:<input name="address" type="text" value="${user.getAddress()}">
-        </p>
-        <p>
-            <span class="major-icon"></span>
-            &nbsp;&nbsp;年级专业：<input name="major" type="text" value="${user.getMajor()}"></a>
-        </p>
-        <div class="ask container">
-           <input type="button" class="submit-btn"  value="修改">
-        </div>
-    </div>
-</div><!-- person-info-end -->
+<!-- 个人信息 -->
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+<form action="/edit/changeselfmassege.do" method="post">
+          <div class="form-group">
+              <label for="tel" >联系:</label>
+            <input id="tel" class="form-control" name="tel" type="text" value="${user.getTel()}"></p>
+          </div>
+          <div class="form-group">
+              <label for="address" >地址：</label>
+            <input name="address" class="form-control" id="address" type="text" value="${user.getAddress()}">
+          </div>
+          <div class="form-group">
+           <label for="major" >年级专业：</label>
+              <input name="major" class="form-control" id="major" type="text" value="${user.getMajor()}">
+          </div>
+            <button  class="btn btn-default" type="submit">修改</button>
+    <!-- person-info-end -->
 </form>
-
-
-
-
-
-
-
+    </div>
+</div>
 <footer>
-    <a href="#">©2018-2019 二手书交易</a>
-    <a href="#">意见反馈&nbsp;&nbsp;&nbsp;联系我们&nbsp;&nbsp;&nbsp;隐私权声明&nbsp;&nbsp;&nbsp;使用条款</a>
+    <p align="center" href="#">©2018-2019 二手书交易</p>
+    <p align="center" href="#">意见反馈&nbsp;&nbsp;&nbsp;联系我们&nbsp;&nbsp;&nbsp;隐私权声明&nbsp;&nbsp;&nbsp;使用条款</p>
 </footer>
 
 <!-- javascript- -->
