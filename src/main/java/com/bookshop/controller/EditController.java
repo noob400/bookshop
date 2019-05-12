@@ -34,7 +34,7 @@ public class EditController {
         User user1= (User) request.getSession().getAttribute("user");
         user.setId(user1.getId());
         user.setStudentid(user1.getStudentid());
-        userService.update(user);
+        userService.updatesomemassege(user);
         User newuser=userService.getByStudentid(user.getStudentid());
         ModelAndView mav=new ModelAndView("myBookshelf");
         mav.addObject("user",newuser);

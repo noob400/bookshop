@@ -17,6 +17,17 @@
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
+
+ create table ordertable(orderid int primary key auto_increment,
+ bookname varchar(50),
+ userid varchar(50),
+ counts int,
+ contactway varchar(50),
+ contactname varchar(50),
+ price double,
+ orderstatus varchar(50))default charset=utf8;
+
+
 -- ----------------------------
 -- Table structure for admin
 -- ----------------------------
