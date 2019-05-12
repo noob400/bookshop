@@ -13,7 +13,7 @@ public interface UserService {
     User get(int id);
 
     User getByStudentid(String studnetid);
-    void update(User user);
+    void updatesomemassege(User user);
     List<User> getUserList();
 
     void createUser(HashMap<String,String> params);
