@@ -36,16 +36,6 @@
 
 <!-- 个人信息 -->
 <div class="person-info">
-    <p>
-        <a href="#" class="name">${user.getName()}</a>
-    </p>
-    <p>
-        <a href="#" class="sex" >${user.getSex()}</a>
-    </p>
-    <p class="set">
-        <a href="/edit/editself.do" class="edit">编辑个人主页</a>
-        <img class="set-icon" src="<%=request.getContextPath()%>/img/setting.png">
-    </p>
     <div class="contact">
         <p>
             <span class="call-icon"></span>
@@ -69,6 +59,7 @@
     <p class="upload-icon"></p>
     <a id="sell-upload" href="goUpload.do?bookType=1">上传书至书摊</a>
     <a id="delete-book" href="#">删除二手书</a>
+    <a id="edit-info" href="/edit/editself.do">编辑个人主页</a>
 </div>
 
 <!-- 我的书摊 -->

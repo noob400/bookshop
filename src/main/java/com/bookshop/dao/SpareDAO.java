@@ -8,4 +8,6 @@ public interface SpareDAO {
     List<Spare> getAllSpare();
 
     void insertSpare(Spare s);
+
+    void delete(int id);
 }

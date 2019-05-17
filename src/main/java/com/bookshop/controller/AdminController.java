@@ -3,7 +3,6 @@ package com.bookshop.controller;
 import com.bookshop.common.Result;
 import com.bookshop.common.ResultGenerator;
 import com.bookshop.pojo.Admin;
-import com.bookshop.pojo.User;
 import com.bookshop.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.TreeMap;
 
 
 @RequestMapping("/admin")
@@ -108,7 +106,15 @@ public class AdminController {
         ModelAndView mav =new ModelAndView("admin/gather_template");
         mav.addObject("pageName","闲置物管理");
         mav.addObject("pageAPI","/data/spare");
-        // TODO:WRITE IT
+        mav.addObject("pageField", new LinkedHashMap<String, String>() {
+            {
+                put("id", "ID");
+                put("uid", "用户ID");
+                put("name", "名称");
+                put("price", "单价");
+                put("description", "描述");
+            }
+        });
         return mav;
     }
 
@@ -117,7 +123,17 @@ public class AdminController {
         ModelAndView mav =new ModelAndView("admin/gather_template");
         mav.addObject("pageName","订单管理");
         mav.addObject("pageAPI","/data/order");
-        // TODO:WRITE IT
+        mav.addObject("pageField", new LinkedHashMap<String, String>() {
+            {
+                put("orderid", "ID");
+                put("bookname", "书名");
+                put("userid", "用户ID");
+                put("counts", "购买数量");
+                put("contactway", "联系方式");
+                put("price", "单价");
+                put("orderstatus", "订单状态");
+            }
+        });
         return mav;
     }
 }

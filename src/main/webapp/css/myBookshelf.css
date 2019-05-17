@@ -197,6 +197,11 @@
 	color: white;	
 }
 
+#sell-upload:hover, #ask-upload:hover, #edit-info:hover {
+    border: 1px solid #ae6d6a;
+    background-color: #ae6d6a;
+    color: white;
+}
 #ask-upload{
 	display: none;
 }
@@ -213,6 +218,17 @@
 	border-radius: 3px;	
 }
 
+#edit-info {
+    margin-top: 5px;
+    position: absolute;
+    right: 20px;
+    text-decoration: none;
+    padding: 3px 10px;
+    border: 2px solid #ae6d6a;
+    font-size: 14px;
+    color: #ae6d6a;
+    border-radius: 3px;
+}
 .book-ul{
 	width: 100%;
 	height: auto;

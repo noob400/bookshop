@@ -13,4 +13,15 @@
     <select id="getorder" resultType="Order" parameterType="_int">
         select * from ordertable where orderid=#{orderid};
     </select>
+
+    <select id="getOrders" resultType="Order">
+        select *
+        from ordertable
+    </select>
+
+    <delete id="delete" parameterType="_int">
+        delete
+        from ordertable
+        where orderid = #{id};
+    </delete>
 </mapper>

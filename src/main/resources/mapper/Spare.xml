@@ -14,4 +14,10 @@
         insert into spare
         values (0, #{uid}, #{name}, #{price}, #{description})
     </insert>
+
+    <delete id="delete" parameterType="_int">
+        delete
+        from spare
+        where id = #{id}
+    </delete>
 </mapper>

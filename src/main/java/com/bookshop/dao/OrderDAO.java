@@ -8,4 +8,8 @@ public interface OrderDAO {
     void addorderindatabase(Order order);
     List<Order> getallorders(Order order);
     Order getorder(int orderid);
+
+    List<Order> getOrders();
+
+    void delete(int orderId);
 }
