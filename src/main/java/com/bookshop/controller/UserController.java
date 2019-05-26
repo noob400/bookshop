@@ -2,6 +2,7 @@ package com.bookshop.controller;
 
 import com.bookshop.common.Result;
 import com.bookshop.common.ResultGenerator;
+import com.bookshop.dao.UserDAO;
 import com.bookshop.pojo.User;
 import com.bookshop.service.UserService;
 import org.apache.log4j.Logger;
@@ -19,6 +20,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserDAO userdao;
 
     // 日志文件
     private static final Logger log = Logger.getLogger(UserController.class);
@@ -61,4 +64,18 @@ public class UserController {
         request.getSession().removeAttribute("user");
         return ResultGenerator.genSuccessResult();
     }
+
+    @RequestMapping(value = "/checkSignIn", method = RequestMethod.POST)
+    public Result signIn(@RequestBody User user, HttpServletRequest request) {
+        if (user != null) {
+            userdao.createUser(user);
+            Map data = new HashMap();
+            data.put("currentUser", user);
+            request.getSession().setAttribute("user", userService.getByStudentid(user.getStudentid()));
+            return ResultGenerator.genSuccessResult(data);
+        } else {
+            return ResultGenerator.genFailResult("学号或密码输入错误！");
+        }
+    }
+
 }
