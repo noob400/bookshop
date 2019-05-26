@@ -30,6 +30,7 @@
         <a href="#" class="username">${user.getName()}</a>
         <a href="/myBookshelf.do" class="bookshelf">||&nbsp;&nbsp;&nbsp;我的书架</a>
         <a href="/orders/intomyorders" class="order">||&nbsp;&nbsp;&nbsp;我的订单</a>
+        <a href="/edit/editself.do">||&nbsp;&nbsp;&nbsp;编辑个人主页</a>
         <a href="#" class="logout">[ 退 出 ]</a>
     </div> <!-- nav-info-end -->
 </nav>
@@ -37,6 +38,14 @@
 <!-- 个人信息 -->
 <div class="person-info">
     <div class="contact">
+        <p>
+            <span class=""></span>
+            姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：
+            <a href="#" class="num">${user.getName()}</a></p>
+        <p>
+            <span class="" ></span>
+            姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：
+            <a href="#" class="num">${user.getSex()}</a></p>
         <p>
             <span class="call-icon"></span>
             联&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;系：
@@ -59,7 +68,6 @@
     <p class="upload-icon"></p>
     <a id="sell-upload" href="goUpload.do?bookType=1">上传书至书摊</a>
     <a id="delete-book" href="#">删除二手书</a>
-    <a id="edit-info" href="/edit/editself.do">编辑个人主页</a>
 </div>
 
 <!-- 我的书摊 -->
@@ -69,7 +77,7 @@
             <c:forEach items="${books}" var="book" varStatus="bookStatus">
             <li class="book-list">
                 <p class="book-pic">
-                    <img src="img/book-list/article/${book.getBookImage().getId()}.jpg">
+                    <img src="../img/book-list/article/${book.getBookImage().getId()}.jpg">
                 </p>
                 <h5 class="book-name">${book.getName()}</h5>
                 <form>

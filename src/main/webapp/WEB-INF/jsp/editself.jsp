@@ -93,7 +93,7 @@
 
             },
             error:function (result) {
-                console.log("haha");
+                console.log("error");
             }
 
         });

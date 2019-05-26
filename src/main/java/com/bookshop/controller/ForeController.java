@@ -40,6 +40,7 @@ public class ForeController {
         User user = (User) request.getSession().getAttribute("user");
         List<Book> books = bookService.listByUserId(user.getId(),1);
         List<Book> askBooks = bookService.listByUserId(user.getId(),0);
+        request.getSession().setAttribute("askBooks",askBooks);
         mav.addObject("books",books);
         mav.addObject("askBooks",askBooks);
         return mav;
