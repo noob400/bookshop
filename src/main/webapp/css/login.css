@@ -61,15 +61,13 @@ body {
 	/*flex-basis: 50%;*/
 }
 
-.forgetPass{
+.forgetPass {
 	text-decoration: none;
-	color:#0a7eb3;
+    color: #0a7eb3;
 	font-size: 12px;
-	position: absolute;
+    position: relative;
 	right: 80px;
-
 }
-
 #errorInfo{
 	color:red;
 	font-size: 12px;
