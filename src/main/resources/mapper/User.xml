@@ -14,7 +14,7 @@
     </select>
 
     <update id="update" parameterType="User" >
-        update user set tel=#{tel},address=#{address},major=#{major} where id=#{id}
+        update user set name=#{name},sex=#{sex},tel=#{tel},address=#{address},major=#{major} where id=#{id}
     </update>
 
     <select id="checkPassword" parameterType="User" resultType="int">

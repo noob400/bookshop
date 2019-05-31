@@ -45,6 +45,14 @@
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
 <form  id="editform" onsubmit="return false" action="##" method="post">
+    <div class="form-group">
+        <label for="name" >姓名:</label>
+        <input id="name" class="form-control" name="name" type="text" value="${user.getName()}"></p>
+    </div>
+    <div class="form-group">
+        <label for="sex" >性别:</label>
+        <input id="sex" class="form-control" name="sex" type="text" value="${user.getSex()}"></p>
+    </div>
           <div class="form-group">
               <label for="tel" >联系:</label>
             <input id="tel" class="form-control" name="tel" type="text" value="${user.getTel()}"></p>
@@ -75,10 +83,12 @@
 <script>
     function login() {
         $('#errorInfo').html("");
+        var name=$('#name').val();
+        var sex=$('#sex').val();
         var tel = $('#tel').val();
         var address = $('#address').val();
         var major = $('#major').val();
-        if (tel.length==0||address.length == 0 || major.length == 0) {
+        if (tel.length==0||address.length == 0 || major.length == 0||name.length==0||sex.length==0) {
             $('#errorInfo').html("请填全信息！");
             return false;
         }
