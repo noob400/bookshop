@@ -68,6 +68,9 @@ public class UserController {
     @RequestMapping(value = "/checkSignIn", method = RequestMethod.POST)
     public Result signIn(@RequestBody User user, HttpServletRequest request) {
         if (user != null) {
+            if(userService.hasAccount(user)){
+                return ResultGenerator.genFailResult("账号已经存在！");
+            }
             userdao.createUser(user);
             Map data = new HashMap();
             data.put("currentUser", user);

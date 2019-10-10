@@ -15,14 +15,14 @@
 </head>
 <body>
     <div id="login-container">
-        <h2><%=isAdminMode?"管理员登录":"用户登录"%> | 校园二手书交易平台</h2>
+        <h2><%=isAdminMode?"管理员登录":"用户登录"%> | 二手书交易平台</h2>
         <br />
         <form>
             <input type="text" id="studentid" class="userName" placeholder="学号"><br/>
             <input type="password" id="password" class="password" placeholder="密码"><br/>
-            <a class="forgetPass" href="/signin.do">注册?</a><br/>
-            <a class="forgetPass" href="/admin">管理员?</a>
             <button class="loginBtn" id="login-button" type="submit">登录</button><br/>
+            <a class="forgetPass1" href="/signin.do">注册?</a>
+            <a class="forgetPass" href="/admin">管理员?</a>
         </form>
         <p id="errorInfo"></p>
     </div>
@@ -49,7 +49,7 @@
                 contentType: "application/json;charset=UTF-8",
                 data: jsonData,
                 success: function (result) {
-                    if (result.resultCode === 200) {
+                    if (result.resultCode == 200) {
                         event.preventDefault();
                         location.href = '<%=isAdminMode?"/admin/gather_user.do":"/home.do"%>';
                     } else {

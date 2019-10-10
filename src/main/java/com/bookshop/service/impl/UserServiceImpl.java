@@ -58,4 +58,10 @@ public class UserServiceImpl implements UserService{
         userDAO.updateUser(Utils.fillObjectFromMap(new User(),params));
     }
 
+    @Override
+    public boolean hasAccount(User user){
+        int flag=userDAO.checkAccount(user);
+        return flag==1;
+    }
+
 }

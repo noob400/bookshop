@@ -24,4 +24,6 @@ public interface UserDAO {
 
     void deleteUser(int id);
 
+    int checkAccount(User user);
+
 }

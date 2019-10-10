@@ -8,4 +8,6 @@ public interface OrderService {
     void addorders(Order order);
     List<Order> get(Order order);
     Order get(int orderid);
+    int ordercount();
+    void delete(int orderid);
 }

@@ -30,4 +30,14 @@ public class OrderServiceImpl  implements OrderService {
         Order result=orderDAO.getorder(orderid);
         return result;
     }
+
+    @Override
+    public int ordercount(){
+        return orderDAO.ordercount();
+    }
+
+    @Override
+    public void delete(int orderid){
+        orderDAO.delete(orderid);
+    }
 }

@@ -12,4 +12,7 @@ public interface OrderDAO {
     List<Order> getOrders();
 
     void delete(int orderId);
+
+    int ordercount();
+
 }

@@ -41,21 +41,22 @@
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
-            <tr><td>订单号</td><td>书名</td><td>订单数量</td><td>联系方式</td><td>联系人</td><td>总价</td><td>订单状态</td></tr>
+            <tr><td>订单号</td><td>书名</td><td>订单数量</td><td>联系方式</td><td>联系人</td><td>总价</td><td>订单状态</td><td></td></tr>
             </thead>
             <tbody>
-            <c:forEach items="${orders}" var="orders">
+            <c:forEach items="${orders}" var="orders" >
                 <c:if test="${orders.orderid<0}">
                     <tr><td>无</td><td>无</td><td>无</td><td>无</td>
                         <td>无</td><td>无</td><td>无</td></tr>
                 </c:if>
                 <c:if test="${orders.orderid>0}">
                     <tr><td>${orders.orderid}</td><td>${orders.bookname}</td><td>${orders.counts}</td><td>${orders.contactway}</td>
-                    <td>${orders.contactname}</td><td>${orders.price}元</td><td><a href="pay.do">${orders.orderstatus}</a></td></tr>
+                    <td>${orders.contactname}</td><td>${orders.price}元</td><td><a href="pay.do">${orders.orderstatus}</a></td><td><a href="/orders/deleteorder.do/${orders.getOrderid()}">删除</a></td></tr>
                 </c:if>
                 </c:forEach>
             </tbody>
         </table>
+        <p id="errorInfo"></p>
     </div>
     </div>
     <footer>
@@ -74,6 +75,27 @@
     <p align="center" href="#">意见反馈&nbsp;&nbsp;&nbsp;联系我们&nbsp;&nbsp;&nbsp;隐私权声明&nbsp;&nbsp;&nbsp;使用条款</p>
 </footer>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/session.js"></script>
+<script type="text/javascript">
+    /*function deleteorder(num1) {
+        $('#errorInfo').html("");
+        var id=num1;
+        var jsonData=JSON.stringify(id);
+        $.ajax({
+           type:"POST",
+           dataType:"json",
+           url:"/orders/deleteorder.do",
+           data:jsonData,
+           success:function (result) {
+               if(result.resulttCode==200){
+                   location.href='/orders/intomyorders';
+               }else {
+                   $('#errorInfo').html("删除失败");
+               }
+           }
+        });
 
+    }*/
+</script>
 </body>
 </html>

@@ -19,9 +19,13 @@
         from ordertable
     </select>
 
+    <select id="ordercount" resultType="_int">
+        select count(orderid) from ordertable;
+    </select>
+
     <delete id="delete" parameterType="_int">
         delete
         from ordertable
-        where orderid = #{id};
+        where orderid = #{orderid};
     </delete>
 </mapper>

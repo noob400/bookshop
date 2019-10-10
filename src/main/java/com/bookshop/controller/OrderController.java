@@ -4,6 +4,8 @@ import com.bookshop.common.Result;
 import com.bookshop.common.ResultGenerator;
 import com.bookshop.pojo.Book;
 import com.bookshop.pojo.Order;
+import com.bookshop.pojo.Page;
+import com.github.pagehelper.PageHelper;
 import com.bookshop.pojo.User;
 import com.bookshop.service.BookImageService;
 import com.bookshop.service.BookService;
@@ -61,10 +63,18 @@ public class OrderController {
         }
 
     @RequestMapping("/intomyorders")
-    public ModelAndView intomyorders(Order order,HttpServletRequest request){
+    public ModelAndView intomyorders(Page page, Order order, HttpServletRequest request){
         User user=(User)request.getSession().getAttribute("user");
         order.setUserid(user.getStudentid());
         List<Order> orderlist=orderService.get(order);
+        int total = orderService.ordercount();
+        page.calculateEnd(total);
+        if (page.getStart() < 0) {
+            page.setStart(0);
+        }else if (page.getStart() > total){
+            page.setEnd(page.getEnd());
+        }
+        PageHelper.offsetPage(page.getStart(),16);
         if(orderlist.size()==0){
             ModelAndView mav=new ModelAndView("myorders");
             Order order1=new Order();
@@ -83,5 +93,26 @@ public class OrderController {
     @RequestMapping("pay.do")
     public ModelAndView topay(Order order){
         return  new ModelAndView("topay");
+    }
+
+    @RequestMapping(value="/deleteorder.do/{orderid}",method = RequestMethod.GET)
+    public ModelAndView delete(@PathVariable("orderid")int orderid,Order order, HttpServletRequest request){
+        orderService.delete(orderid);
+        User user=(User)request.getSession().getAttribute("user");
+        order.setUserid(user.getStudentid());
+        List<Order> orderlist=orderService.get(order);
+        if(orderlist.size()==0){
+            ModelAndView mav=new ModelAndView("myorders");
+            Order order1=new Order();
+            order1.setOrderid(-1);
+            orderlist.add(order1);
+            mav.addObject("orders",orderlist);
+            return mav;
+        }else {
+            ModelAndView mav=new ModelAndView("myorders");
+            mav.addObject("orders",orderlist);
+            return mav;
+
+        }
     }
 }

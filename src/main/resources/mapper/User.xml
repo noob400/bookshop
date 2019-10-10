@@ -20,6 +20,9 @@
     <select id="checkPassword" parameterType="User" resultType="int">
         select count(*) from user where studentid = #{studentid} and password = #{password}
     </select>
+    <select id="checkAccount" parameterType="User" resultType="int">
+        select count(*) from user where studentid = #{studentid}
+    </select>
 
     <select id="getUserList" resultType="User">
         select * from user;
@@ -41,5 +44,6 @@
                         sex=#{sex},tel=#{tel},address=#{address},
                         major=#{major} where id=#{id};
     </update>
+
 
 </mapper>

@@ -15,13 +15,13 @@
 </head>
 <body>
 <div id="login-container">
-    <h2>用户注册 | 校园二手书交易平台</h2>
+    <h2>用户注册 | 二手书交易平台</h2>
     <br/>
     <form>
         <input type="text" id="studentid" class="userName" placeholder="学号"><br/>
         <input type="password" id="password" class="password" placeholder="密码"><br/>
-        <a class="forgetPass" href="/users/">登录?</a><br/>
-        <button class="loginBtn" id="login-button" type="submit">注册</button>
+        <button class="loginBtn" id="login-button" type="submit">注册</button><br/>
+        <a class="forgetPass2" href="/users/">登录?</a>
         <br/>
     </form>
     <p id="errorInfo"></p>

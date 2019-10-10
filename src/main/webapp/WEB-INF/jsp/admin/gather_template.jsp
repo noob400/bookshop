@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>管理员 | 校园二手书交易平台</title>
+    <title>管理员 | 二手书交易平台</title>
 
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../../css/main.css" rel="stylesheet" type="text/css">
@@ -34,7 +34,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="logout">登出</a></li>
+                <li><a href="logout">退出登录</a></li>
             </ul>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">
@@ -67,7 +67,6 @@
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
                 </button>
             </div>
-
             <table  id="table"
                     data-toggle="table"
                     data-height="460"

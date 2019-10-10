@@ -81,7 +81,7 @@
                 <label for="contactname">联系人</label>
             <input type="text" class="form-control" id="contactname" name="contactname" placeholder="联系人">
             </div>
-            <button  id="order-button" class="btn btn-default" type="submit" onclick="login()">提交</button><br/>
+            <button  id="order-button" class="btn btn-default" type="submit" onclick="add()">提交</button><br/>
         </form>
         <p id="errorInfo"></p>
     </div>
@@ -93,7 +93,7 @@
 </footer>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.js"></script>
 <script>
-    function login() {
+    function add() {
         $('#errorInfo').html("");
         var counts = $('#counts').val();
         var contactway = $('#contactway').val();

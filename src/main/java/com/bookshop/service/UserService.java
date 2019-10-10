@@ -21,4 +21,6 @@ public interface UserService {
     void deleteUser(int id);
 
     void updateUser(HashMap<String,String> params);
+
+    boolean hasAccount(User user);
 }
